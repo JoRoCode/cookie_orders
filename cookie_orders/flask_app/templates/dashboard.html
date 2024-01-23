@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Above is how we link our style sheet. url_for creates a url based on the static folder, and file name given -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+    <!-- Above is how we link our JS file. Make sure that you understand why we use defer -->
+    <title>Cookie Orders</title>
+</head>
+<body>
+    <h1>Cookie Orders</h1>
+    <div class="sbs">
+        <div>
+            <table>
+                <h2>All Orders:</h2>
+                <thead>
+                    <tr>
+                        <th>Customer Name</th>
+                        <th>Cookie Type</th>
+                        <th>Number of Boxes</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for order in order_info %}
+                    <tr>
+                        <td hidden>{{ order.id }}</td>
+                        <td>{{ order.name }}</td>
+                        <td>{{ order.cookie_type }}</td>
+                        <td>{{ order.number_of_boxes }}</td>
+                        <td><a href="/cookies/edit/{{ order.id }}">edit</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <a href="/cookies/new">+ New Order</a>
+    </div>
+</body>
+</html>
+
+<!-- Format for adding images -->
+<!-- <img src="{{ url_for('static', filename='images/img.png') }}"> -->

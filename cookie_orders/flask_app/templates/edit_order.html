@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Above is how we link our style sheet. url_for creates a url based on the static folder, and file name given -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+    <!-- Above is how we link our JS file. Make sure that you understand why we use defer -->
+    <title>Cookie Orders</title>
+</head>
+    <body>
+        <div class="sbs">
+            <h1>Change Order</h1>
+            <a href="/cookies">Back to purchaces</a>
+        </div>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}                    
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form action="/cookies/edit/{{ id }}" method="post">
+            <input type="hidden" name="id" value="{{ id }}">
+            <label>
+                Name:
+                <input type="text" name="name" value="{{ order.name }}">
+            </label>
+            <label>
+                Type of Cookies:
+                <input type="text" name="cookie_type" value="{{ order.cookie_type }}">
+                </label>
+            <label>
+                How many Boxes:
+                <input type="text" name="number_of_boxes" value="{{ order.number_of_boxes }}">
+            </label>
+            <input type="submit" value="Log">
+        </form>
+    </body>
+</html>
+
+<!-- Format for adding images -->
+<!-- <img src="{{ url_for('static', filename='images/img.png') }}"> -->
